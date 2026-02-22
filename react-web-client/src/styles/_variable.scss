@@ -1,0 +1,27 @@
+// colors
+$color-primary: #4f46e5;
+$color-danger: #dc2626;
+
+// spacing
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+
+//font-sizes
+$font-sm: 14px;
+$font-md: 16px;
+$font-lg: 20px;
+
+.u-text-center {
+  text-align: center;
+}
+
+.u-m-md {
+  margin: $spacing-md;
+}
+
+.u-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
