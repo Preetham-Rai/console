@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { connectToDB } from './config/database';
 import cors from 'cors'
 import userRouter from './module/users/userRouter'
+import authRouter from './module/auth/authRouter'
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ app.use(cors({
 }))
 
 app.use('/api/user', userRouter)
+app.use('/api/auth', authRouter)
 
 app.get('/', (req: Request, res: Response) => {
     res.status(200).json({
