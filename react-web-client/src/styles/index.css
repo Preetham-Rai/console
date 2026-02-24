@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: "Open-sans";
@@ -26,8 +28,6 @@ body {
   color: #111827;
   line-height: 1.5;
 }
-
-
 
 @layer base {
   :root {
