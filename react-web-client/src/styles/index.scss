@@ -1,0 +1,33 @@
+@use "./themes/dark";
+@use "./themes/light";
+@use "./variable";
+
+@font-face {
+  font-family: "Open-sans";
+  src: url("../assets/fonts/Open_Sans/static/OpenSans-Regular.ttf");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: "Open-sans";
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+  line-height: 1.5;
+}
