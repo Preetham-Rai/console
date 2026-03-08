@@ -22,7 +22,9 @@ body,
   width: 100%;
 }
 
-body {
+.main {
+  height: 100%;
+  width: 100%;
   font-family: "Open-sans";
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -31,3 +33,13 @@ body {
     color 0.3s ease;
   line-height: 1.5;
 }
+
+// body {
+//   font-family: "Open-sans";
+//   background-color: var(--bg-primary);
+//   color: var(--text-primary);
+//   transition:
+//     background 0.3s ease,
+//     color 0.3s ease;
+//   line-height: 1.5;
+// }

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { DatePicker, Switch } from "antd";
+import { DatePicker, Switch, Layout } from "antd";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { toggleTheme } from "./store/themeSlice";
 import { useEffect } from "react";
@@ -13,16 +13,15 @@ function App() {
   };
 
   useEffect(() => {
-    document.querySelector("body")?.setAttribute("data-theme", theme);
+    document.querySelector(".main")?.setAttribute("data-theme", theme);
   }, [theme]);
 
   return (
-    <main>
-      <Switch onChange={handleThemeChanger} />
-      <DatePicker />
-      <p>Count Value : {0}</p>
+    <Layout className="main">
+      {/* <Switch style={{ width: "20px" }} onChange={handleThemeChanger} />
+      <DatePicker style={{ width: "200px" }} /> */}
       <Outlet />
-    </main>
+    </Layout>
   );
 }
 

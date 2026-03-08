@@ -1,11 +1,12 @@
+import { Layout } from "antd";
 import { Outlet } from "react-router";
+import "./styles/auth.scss";
 
 function AuthComponent() {
   return (
-    <div>
-      <h1>Auth Component</h1>
+    <Layout className="auth-layout">
       <Outlet />
-    </div>
+    </Layout>
   );
 }
 

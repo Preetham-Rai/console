@@ -1,0 +1,13 @@
+.auth-layout {
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.login-card {
+  position: absolute;
+  width: inherit;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
