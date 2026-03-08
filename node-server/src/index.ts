@@ -1,31 +1,47 @@
-import express from 'express';
-import type { Application, Request, Response } from 'express';
+import http from 'http'
+import app from './app';
 import dotenv from 'dotenv'
 import { connectToDB } from './config/database';
-import cors from 'cors'
-import userRouter from './module/users/userRouter'
-import authRouter from './module/auth/authRouter'
+import logger from './config/logger';
+
 
 dotenv.config()
+const server = http.createServer(app)
 
-const app: Application = express()
-connectToDB()
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(cors({
-    origin: "http://localhost:3001",
-    credentials: true,
-}))
+const PORT = process.env.PORT || 3000
 
-app.use('/api/user', userRouter)
-app.use('/api/auth', authRouter)
 
-app.get('/', (req: Request, res: Response) => {
-    res.status(200).json({
-        message: "Hello from the server"
+connectToDB().then(() => {
+    server.listen(PORT, () => {
+        logger.info(`Server is Running in http://localhost:${PORT}`)
     })
+}).catch((err) => {
+    Promise.reject(err)
 })
 
-app.listen(3000, () => {
-    console.log('Serve is running in http://localhost:3000')
+server.on('error', (err: NodeJS.ErrnoException) => {
+    if (err.code === 'EADDRINUSE') {
+        console.log('Address is already in use')
+        process.exit(1)
+    }
+
+    if (err.code === 'EACCES') {
+        console.log('Permission denied for this port')
+        process.exit(1)
+    }
+
+    console.log('Server Error', err)
+    process.exit(1)
+})
+
+process.on('uncaughtException', (err) => {
+    console.log('Uncaught Exception Error', err)
+    process.exit(1)
+})
+
+process.on('SIGTERM', () => {
+    console.log('Shutting Down the server....')
+    server.close(() => {
+        process.exit(0)
+    })
 })

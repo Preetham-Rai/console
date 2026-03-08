@@ -24,12 +24,14 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.1",
     "nodemon": "^3.1.14",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "winston": "^3.19.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.3.0",
+    "@types/winston": "^2.4.4",
     "typescript": "^5.9.3"
   }
 }
