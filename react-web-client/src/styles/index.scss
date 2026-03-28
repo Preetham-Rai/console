@@ -1,6 +1,7 @@
 @use "./themes/dark";
 @use "./themes/light";
 @use "./variable";
+@use "./common.scss";
 
 @font-face {
   font-family: "Open-sans";

@@ -1,19 +1,27 @@
 import { Outlet } from "react-router";
 import { Layout } from "antd";
-import { useAppSelector } from "./app/hooks";
-import { useEffect } from "react";
+import { Content, Header } from "antd/es/layout/layout";
+import Sider from "antd/es/layout/Sider";
 
 function App() {
-  const theme = useAppSelector((state) => state.theme.mode);
-
-  useEffect(() => {
-    document.querySelector(".main")?.setAttribute("data-theme", theme);
-  }, [theme]);
-
   return (
-    <Layout className="main">
-      <Outlet />
-    </Layout>
+    <>
+      <Sider
+        theme="light"
+        width={"50px"}
+        style={{ borderRight: "1px solid grey" }}
+      >
+        hey
+      </Sider>
+      <Layout className="main">
+        <Header className="app-header">
+          This is the header of the appplication
+        </Header>
+        <Content>
+          <Outlet />
+        </Content>
+      </Layout>
+    </>
   );
 }
 

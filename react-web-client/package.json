@@ -11,20 +11,16 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@reduxjs/toolkit": "^2.11.2",
-    "@tailwindcss/vite": "^4.2.0",
     "@tanstack/react-query": "^5.90.19",
-    "@types/react-redux": "^7.1.34",
     "antd": "^6.3.1",
     "axios": "^1.13.5",
     "lucide-react": "^0.575.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.71.2",
-    "react-redux": "^9.2.0",
     "react-router": "^7.13.0",
-    "tailwindcss-animate": "^1.0.7",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
