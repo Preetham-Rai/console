@@ -1,7 +1,10 @@
 package env
 
 import (
+	"log"
+
 	"github.com/joeshaw/envdecode"
+	"github.com/joho/godotenv"
 )
 
 type config struct {
@@ -15,8 +18,13 @@ type config struct {
 var Config config
 
 func Init() {
-	err := envdecode.Decode(&Config)
+	err := godotenv.Load()
 	if err != nil {
-		panic(error.Error(err))
+		log.Println("No .env file found (this is okay in production)")
+	}
+
+	err = envdecode.Decode(&Config)
+	if err != nil {
+		panic(err)
 	}
 }

@@ -10,14 +10,21 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func Connect() {
+func fallbackURL(url string) string {
+	if url == "" {
+		return "mongodb://localhost:27017"
+	}
+	return url
+}
+
+func Connect() *mongo.Database {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	dbURI := env.Config.DatabaseURL
-	fmt.Println("Database URL", dbURI)
+	dbName := env.Config.DatabaseName
+	dbURI := fallbackURL(env.Config.DatabaseURL) + dbName
 
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(dbURI))
 	if err != nil {
 		panic(err)
 	}
@@ -28,4 +35,5 @@ func Connect() {
 	}
 
 	fmt.Println("Database connection succesfull")
+	return client.Database(dbName)
 }
