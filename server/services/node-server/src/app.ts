@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
-import userRouter from './module/users/userRouter'
-import authRouter from './module/auth/authRouter'
+import userRouter from './routes/user_routes'
+import authRouter from './routes/auth_routes'
 import dotenv from 'dotenv'
 
 const app = express();

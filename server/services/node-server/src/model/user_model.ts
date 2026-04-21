@@ -1,9 +1,9 @@
 import { Schema, model, CallbackWithoutResultAndOptionalError } from 'mongoose'
 import bcrypt from 'bcrypt'
-import { IUser, UserRole } from './user.interface'
+import { User } from '../types/user'
 
-const userSchema = new Schema<IUser>({
-    userName: {
+const userSchema = new Schema<User>({
+    username: {
         type: String,
         required: true,
         minLength: 3
@@ -19,11 +19,10 @@ const userSchema = new Schema<IUser>({
         type: String,
         required: true,
         minLength: 6,
-        select: false
     },
     role: {
         type: String,
-        default: UserRole.USER,
+        default: 'user',
         index: true
     },
     isActive: {
@@ -33,6 +32,45 @@ const userSchema = new Schema<IUser>({
     isDeleted: {
         type: Boolean,
         default: false
+    },
+    avatarUrl: {
+        type: String
+    },
+    bio: {
+        type: String
+    },
+    location: {
+        type: String
+    },
+    preferences: {
+        theme: {
+            type: String,
+            enum: ['light', 'dark'],
+            default: 'light'
+        },
+        notifications: {
+            type: Boolean,
+            default: true
+        }
+    },
+    isEmailVerified: {
+        type: Boolean,
+        default: false
+    },
+    lastLoginAt: {
+        type: Date
+    },
+    name: {
+        type: String,
+        required: true,
+        minLength: 3
+    },
+    permissions: {
+        type: [String],
+        default: ['read']
+    },
+    deletedAt: {
+        type: Date
     }
 }, {
     timestamps: true
@@ -47,4 +85,4 @@ userSchema.pre('save', async function () {
     this.password = await bcrypt.hash(this.password, salt);
 })
 
-export const UserModel = model<IUser>('User', userSchema)
+export const UserModel = model<User>('User', userSchema)

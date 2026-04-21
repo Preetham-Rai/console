@@ -1,7 +1,7 @@
-import { IUser } from "./user.interface";
-import { UserModel } from "./user.schema";
+import { User } from "../../types/user"
+import { UserModel } from "./../../model/user_model"
 
-export const createUserService = async (data: IUser) => {
+export const createUserService = async (data: User) => {
     try {
         const response = await UserModel.create(data)
         console.log(response)

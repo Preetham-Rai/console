@@ -3,6 +3,7 @@ import app from './app';
 import dotenv from 'dotenv'
 import { connectToDB } from './config/database';
 import logger from './config/logger';
+import { connectRedis } from './config/redis';
 
 
 dotenv.config()
@@ -10,9 +11,13 @@ const server = http.createServer(app)
 
 const PORT = process.env.PORT || 3000
 
+const start = async () => {
+    await connectRedis()
+}
 
 connectToDB().then(() => {
     server.listen(PORT, () => {
+        start()
         logger.info(`Server is Running in http://localhost:${PORT}`)
     })
 }).catch((err) => {

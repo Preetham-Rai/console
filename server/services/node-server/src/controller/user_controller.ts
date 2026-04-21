@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { createUserService } from "./userService";
+import { createUserService } from "../service/user/user_service";
 
 export const createUser = async (req: Request, res: Response) => {
     try {
@@ -11,8 +11,8 @@ export const createUser = async (req: Request, res: Response) => {
         }
     } catch (error) {
         if (error) {
-            res.send(500).send({
-                message: "Internal Server Errro"
+            res.status(500).send({
+                message: "Internal Server Error"
             })
         }
     }

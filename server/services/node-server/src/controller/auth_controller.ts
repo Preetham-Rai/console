@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { loginUser } from "./authService";
-import { UserModel } from "../users/user.schema";
+import { loginUser } from "../service/auth/auth_service";
+import { UserModel } from "../model/user_model";
 
 export const login = async (req: Request, res: Response) => {
     try {
