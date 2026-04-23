@@ -1,18 +1,18 @@
 import type { Request, Response } from "express";
 import { loginUser, registerUser } from "../service/auth/auth_service";
-import { UserModel } from "../model/user_model";
-import { User } from "../types/user";
 
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
+        const result = await loginUser(email, password)
+        const statusCode = result.status ? 200 : 401
 
-        const user = await UserModel.findOne({ email }).select('+password');
-
-        if (!user) return res.status(401).send({ message: 'Invalid Credentials' })
-
-        const result = await loginUser(user, password)
-        res.json(result)
+        res.status(statusCode).json({
+            status: result.status,
+            accessToken: result.token,
+            refreshToken: result.refreshToken,
+            message: result.message
+        })
     } catch (error) {
         res.status(500).send({ message: 'Internal Server Error' })
     }

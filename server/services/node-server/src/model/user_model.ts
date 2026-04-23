@@ -6,7 +6,8 @@ const userSchema = new Schema<User>({
     username: {
         type: String,
         required: true,
-        minLength: 3
+        minLength: 3,
+        unique: true
     },
     email: {
         type: String,
@@ -63,7 +64,8 @@ const userSchema = new Schema<User>({
     name: {
         type: String,
         required: true,
-        minLength: 3
+        minLength: 3,
+        index: true
     },
     permissions: {
         type: [String],
