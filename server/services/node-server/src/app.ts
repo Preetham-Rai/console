@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express'
 import cors from 'cors'
 import userRouter from './routes/user_routes'
 import authRouter from './routes/auth_routes'
+import discussionRouter from './routes/discussion_routes'
 import dotenv from 'dotenv'
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors({
 
 app.use('/api/user', userRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/discussion', discussionRouter)
 
 app.get('/health', (req: Request, res: Response) => {
     res.status(200).send({ status: "OK" })
