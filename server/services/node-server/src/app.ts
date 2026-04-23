@@ -4,6 +4,7 @@ import userRouter from './routes/user_routes'
 import authRouter from './routes/auth_routes'
 import discussionRouter from './routes/discussion_routes'
 import dotenv from 'dotenv'
+import { authMiddleware } from './middleware/auth_middleware'
 
 const app = express();
 dotenv.config()
@@ -19,7 +20,7 @@ app.use(cors({
 
 app.use('/api/user', userRouter)
 app.use('/api/auth', authRouter)
-app.use('/api/discussion', discussionRouter)
+app.use('/api/discussion', authMiddleware, discussionRouter)
 
 app.get('/health', (req: Request, res: Response) => {
     res.status(200).send({ status: "OK" })
