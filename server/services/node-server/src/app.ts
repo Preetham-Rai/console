@@ -1,10 +1,7 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
-import userRouter from './routes/user_routes'
-import authRouter from './routes/auth_routes'
-import discussionRouter from './routes/discussion_routes'
 import dotenv from 'dotenv'
-import { authMiddleware } from './middleware/auth_middleware'
+import router from './routes/routes'
 
 const app = express();
 dotenv.config()
@@ -17,10 +14,8 @@ app.use(cors({
     credentials: true,
 }))
 
+app.use('/', router)
 
-app.use('/api/user', userRouter)
-app.use('/api/auth', authRouter)
-app.use('/api/discussion', authMiddleware, discussionRouter)
 
 app.get('/health', (req: Request, res: Response) => {
     res.status(200).send({ status: "OK" })
