@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "worker": "node dist/jobs/worker.js",
+    "worker:dev": "ts-node src/jobs/worker.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,9 +20,11 @@
     "@types/express": "^5.0.6",
     "@types/mongoose": "^5.11.96",
     "bcrypt": "^6.0.0",
+    "bullmq": "^5.76.1",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "ioredis": "^5.10.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.1",
     "nodemon": "^3.1.14",
