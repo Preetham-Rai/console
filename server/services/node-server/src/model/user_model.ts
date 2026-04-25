@@ -23,6 +23,7 @@ const userSchema = new Schema<User>({
     },
     role: {
         type: String,
+        enum: ['user', 'admin', 'moderator'],
         default: 'user',
         index: true
     },
@@ -52,6 +53,11 @@ const userSchema = new Schema<User>({
         notifications: {
             type: Boolean,
             default: true
+        },
+        allowMessagesFrom: {
+            type: String,
+            enum: ['everyone', 'followers', 'none'],
+            default: 'everyone'
         }
     },
     isEmailVerified: {
@@ -60,6 +66,13 @@ const userSchema = new Schema<User>({
     },
     lastLoginAt: {
         type: Date
+    },
+    lastSeenAt: {
+        type: Date
+    },
+    isOnline: {
+        type: Boolean,
+        default: false
     },
     name: {
         type: String,
@@ -73,6 +86,18 @@ const userSchema = new Schema<User>({
     },
     deletedAt: {
         type: Date
+    },
+    followersCount: {
+        type: Number,
+        default: 0
+    },
+    followingCount: {
+        type: Number,
+        default: 0
+    },
+    blockedUsers: {
+        type: [String],
+        default: []
     }
 }, {
     timestamps: true

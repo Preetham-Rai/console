@@ -1,5 +1,6 @@
 .auth-layout {
   width: 50%;
+  height: 100%;
   margin: 0 auto;
   position: relative;
 }
@@ -10,4 +11,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.registration-content {
+  height: 100%;
+  overflow-y: auto;
+  .registration-form {
+    max-width: 400px;
+    margin: 0 auto;
+    overflow-x: auto;
+  }
 }

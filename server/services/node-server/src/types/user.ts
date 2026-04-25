@@ -3,20 +3,26 @@ export interface User {
     email: string
     username?: string
     password: string
-    isEmailVerified: boolean
+    isEmailVerified?: boolean       // defaults to false
     lastLoginAt?: Date
-    role: 'user' | 'admin'
+    role: 'user' | 'admin' | 'moderator'         // defaults to 'user'
     permissions?: string[]
     avatarUrl?: string
     bio?: string
     location?: string
+    lastSeenAt?: Date
+    isOnline?: boolean
     preferences?: {
-        theme: 'light' | 'dark'
-        notifications: boolean
+        theme?: 'light' | 'dark'    // defaults to 'light'
+        notifications?: boolean
+        allowMessagesFrom?: 'everyone' | 'followers' | 'none'
     }
-    isDeleted: boolean
-    isActive: boolean
-    createdAt: Date
-    updatedAt: Date
+    isDeleted?: boolean             // defaults to false
+    isActive?: boolean              // defaults to true
     deletedAt?: Date
+    createdAt?: Date                // auto-set by mongoose timestamps
+    updatedAt?: Date                // auto-set by mongoose timestamps
+    followersCount?: number
+    followingCount?: number
+    blockedUsers?: string[]
 }

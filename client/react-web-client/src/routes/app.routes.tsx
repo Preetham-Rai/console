@@ -11,7 +11,7 @@ const AppRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="discussion" replace />,
+        element: <Navigate to="auth" replace />,
       },
       dashboardRoute,
       authRoutes,

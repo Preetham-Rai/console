@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import logger from "./logger";
 
 export const connectToDB = async (): Promise<void> => {
     try {
@@ -10,9 +11,12 @@ export const connectToDB = async (): Promise<void> => {
         }
 
         await mongoose.connect(`${url}${dbName}`)
-        console.log('DB Connection successful')
+        logger.info("Database is connected succesfully")
 
     } catch (error) {
         console.error(error)
+        logger.error("Error while connecting to db", {
+            error,
+        })
     }
 }
