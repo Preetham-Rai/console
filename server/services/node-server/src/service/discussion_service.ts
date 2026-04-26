@@ -1,5 +1,5 @@
-import { DiscussionModel } from "../model/discussion_model"
-import { Discussion } from "../types/discussion"
+import { DiscussionModel } from "../model/discussions/discussion_model"
+import { Discussion } from "../types/discussions/discussion"
 
 export const writeDiscussion = async (payload: Discussion) => {
     try {

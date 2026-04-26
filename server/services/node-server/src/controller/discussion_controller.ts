@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { Discussion } from "../types/discussion";
+import { Discussion } from "../types/discussions/discussion";
 import { writeDiscussion } from "../service/discussion_service";
 import { jobQueue } from "../jobs/queue";
 import { JobTypes } from "../types/jobs";
