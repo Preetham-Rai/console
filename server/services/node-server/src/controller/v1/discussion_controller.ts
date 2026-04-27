@@ -1,8 +1,9 @@
 import type { Request, Response } from "express";
-import { Discussion } from "../types/discussions/discussion";
-import { writeDiscussion } from "../service/discussion_service";
-import { jobQueue } from "../jobs/queue";
-import { JobTypes } from "../types/jobs";
+import { Discussion } from "../../types/discussions/discussion";
+import { writeDiscussion } from "../../service/discussion_service";
+import { jobQueue } from "../../jobs/queue";
+import { JobTypes } from "../../types/jobs";
+import logger from "../../config/logger";
 
 export const createDiscussion = async (req: Request<{}, {}, Discussion>, res: Response) => {
     try {
@@ -18,6 +19,10 @@ export const createDiscussion = async (req: Request<{}, {}, Discussion>, res: Re
         await jobQueue.add(JobTypes.SEND_EMAILS, "Joe Mokery")
 
     } catch (error) {
-        console.error(error)
+        ``
+        logger.error("Error in [createDicussion]", {
+            method: req.method,
+            error
+        })
     }
 }
