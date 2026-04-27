@@ -26,4 +26,6 @@ export const loggerMiddleware = (req: Request, res: Response, next: NextFunction
             durationMs: duration,
         });
     })
+
+    next()
 }

@@ -1,15 +1,10 @@
 import type { Request, Response, NextFunction } from "express";
 import { verifyAccessToken } from "../utils/jwt";
-import { Types } from "mongoose";
+import { UserModel } from "../model/user_model";
+import logger from "../config/logger";
 
-export interface AuthRequest extends Request {
-    user?: {
-        userID: Types.ObjectId | null,
-        role: string | null
-    }
-}
 
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const authorization = req.headers.authorization;
 
     if (!authorization) {
@@ -20,12 +15,19 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
 
     try {
         const result = verifyAccessToken(token);
+        const user = await UserModel.findOne({ _id: result.userId })
         req.user = {
-            userID: result.userId,
-            role: result.role
+            id: user?.id,
+            email: user?.email,
+            isActive: user?.isActive,
+            role: user?.role,
+            isEmailVerified: user?.isEmailVerified,
+            permissions: user?.permissions,
+            username: user?.username
         }
         next()
     } catch (error) {
+        logger.error(error)
         return res.status(401).send({ message: 'Invalid Token' })
     }
 }

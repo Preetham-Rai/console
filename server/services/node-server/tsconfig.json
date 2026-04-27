@@ -8,6 +8,12 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "ts-node": {
+    "files": true
   }
 }
