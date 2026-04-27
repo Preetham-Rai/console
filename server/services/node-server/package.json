@@ -9,7 +9,10 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "worker": "node dist/jobs/worker.js",
-    "worker:dev": "ts-node src/jobs/worker.ts"
+    "worker:dev": "ts-node src/jobs/worker.ts",
+    "seed": "ts-node src/scripts/seed.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
@@ -34,10 +37,13 @@
     "winston": "^3.19.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/bcrypt": "^6.0.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.3.0",
     "@types/winston": "^2.4.4",
-    "typescript": "^5.9.3"
+    "eslint": "^10.2.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.59.0"
   }
 }

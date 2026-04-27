@@ -9,6 +9,6 @@ const router = Router()
 
 router.use('/api/user', user)
 router.use('/api/auth', auth)
-router.use('/api/discussion', authMiddleware, discussion)
+router.use('/api/v1/discussion', authMiddleware, discussion)
 
 export default router

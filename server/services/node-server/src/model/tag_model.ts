@@ -12,7 +12,12 @@ const tagSchema = new Schema({
     },
     createdBy: {
         type: Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        default: null
+    },
+    isSystem: {
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true
