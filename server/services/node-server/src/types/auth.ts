@@ -8,3 +8,13 @@ export interface TokenSystem extends Document {
     createdAt: Date,
     updatedAt: Date
 }
+
+export interface AuthUser {
+    id: string | undefined
+    email: string | undefined
+    role: string | undefined
+    permissions: string[] | undefined
+    isActive: boolean | undefined
+    isEmailVerified: boolean | undefined
+    username: string | undefined
+}

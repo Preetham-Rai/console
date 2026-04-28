@@ -32,7 +32,8 @@ const discussionSchema = new Schema<Discussion>({
     ],
     tags: [
         {
-            type: Types.ObjectId,
+            type: String,
+            enum: ['sports', 'study', 'social-media', 'technology', 'health'],
             ref: 'Tag'
         }
     ],

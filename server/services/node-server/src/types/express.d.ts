@@ -4,7 +4,7 @@ import { AuthUser } from "./auth";
 declare global {
     namespace Express {
         interface Request {
-            user?: {
+            user: {
                 id: string | undefined
                 email: string | undefined
                 role: string | undefined

@@ -10,6 +10,7 @@ export const loginUser = async (email: string, password: string) => {
 
     if (!user) {
         return {
+            userId: null,
             status: false,
             token: null,
             refreshToken: null,
@@ -33,6 +34,7 @@ export const loginUser = async (email: string, password: string) => {
     await saveRefreshToken(user._id, refreshToken)
 
     return {
+        userId: user._id,
         status: true,
         token: accessToken,
         refreshToken,

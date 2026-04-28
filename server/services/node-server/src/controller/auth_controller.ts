@@ -8,6 +8,7 @@ export const login = async (req: Request, res: Response) => {
         const statusCode = result.status ? 200 : 401
 
         res.status(statusCode).json({
+            userId: result.userId,
             status: result.status,
             accessToken: result.token,
             refreshToken: result.refreshToken,
