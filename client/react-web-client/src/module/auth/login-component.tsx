@@ -2,6 +2,7 @@ import { Button, Card, Form, Input } from "antd";
 import { loginSchema, type loginFormData } from "./services/schema";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLogin } from "./services/auth-api";
 
 const { Meta } = Card;
 
@@ -14,8 +15,10 @@ function Login() {
     resolver: zodResolver(loginSchema),
   });
 
+  const { mutate: loginUser } = useLogin();
+
   const onSubmit = (data: any) => {
-    console.log("Submitted", data);
+    loginUser(data);
   };
 
   return (

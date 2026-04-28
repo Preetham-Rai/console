@@ -1,12 +1,34 @@
+import logger from "../../config/logger"
 import { User } from "../../types/user"
 import { UserModel } from "./../../model/user_model"
 
-export const createUserService = async (data: User) => {
+export const registerUser = async (data: User) => {
     try {
-        const response = await UserModel.create(data)
-        console.log(response)
-        return true
+        const userEmail = data && data.email
+
+        const isUserExist = await UserModel.findOne({ email: userEmail })
+
+        if (isUserExist) {
+            const err = new Error("User email exists");
+            (err as any).statusCode = 400;
+            (err as any).code = "EMAIL_ALREADY_EXISTS"
+            throw err
+        }
+
+        const created = await UserModel.create(data)
+        if (created) {
+            return {
+                status: true,
+                message: "User registered successfully"
+            }
+        }
+
+        return {
+            status: false,
+            message: "Falied to create a user document"
+        }
     } catch (error) {
-        return false
+        logger.error(error)
+        throw error;
     }
 }

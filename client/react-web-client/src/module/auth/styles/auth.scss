@@ -16,8 +16,10 @@
 .registration-content {
   height: 100%;
   overflow-y: auto;
+  // border: 1px solid red;
   .registration-form {
-    max-width: 400px;
+    max-width: 600px;
+    // border: 1px solid red;
     margin: 0 auto;
     overflow-x: auto;
   }

@@ -1,7 +1,7 @@
-import { Form, Input, Layout, Select, Switch, Button } from "antd";
+import { Form, Input, Layout, Button } from "antd";
 import { useForm, Controller } from "react-hook-form";
 import type { UserRegistration } from "./types/user.types";
-import { useRegistration } from "./services/registration-api";
+import { useRegistration } from "./services/auth-api";
 
 const { Content } = Layout;
 
@@ -10,16 +10,23 @@ function RegistrationComponent() {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<UserRegistration>({
-    defaultValues: {
-      isActive: true,
-      preferences: { theme: "light", notifications: true },
-    },
-  });
+  } = useForm<UserRegistration>({});
   const { mutate: registerUser } = useRegistration();
 
   const onSubmit = (data: UserRegistration) => {
+    debugger;
     registerUser(data);
+  };
+
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 6 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 14 },
+    },
   };
 
   return (
@@ -27,8 +34,10 @@ function RegistrationComponent() {
       <Content className="registration-content">
         <Form
           onFinish={handleSubmit(onSubmit)}
-          layout="vertical"
+          layout="horizontal"
           className="registration-form"
+          {...formItemLayout}
+          // style={{ maxWidth: 600 }}
         >
           <Form.Item label="Name" required help={errors.name?.message}>
             <Controller
@@ -48,10 +57,11 @@ function RegistrationComponent() {
             />
           </Form.Item>
 
-          <Form.Item label="Username">
+          <Form.Item label="Username" required help={errors.username?.message}>
             <Controller
               name="username"
               control={control}
+              rules={{ required: "Username is required" }}
               render={({ field }) => <Input {...field} />}
             />
           </Form.Item>
@@ -62,21 +72,6 @@ function RegistrationComponent() {
               control={control}
               rules={{ required: "Password is required" }}
               render={({ field }) => <Input.Password {...field} />}
-            />
-          </Form.Item>
-
-          <Form.Item label="Role" required help={errors.role?.message}>
-            <Controller
-              name="role"
-              control={control}
-              rules={{ required: "Role is required" }}
-              render={({ field }) => (
-                <Select {...field}>
-                  <Select.Option value="admin">Admin</Select.Option>
-                  <Select.Option value="user">User</Select.Option>
-                  <Select.Option value="moderator">Moderator</Select.Option>
-                </Select>
-              )}
             />
           </Form.Item>
 
@@ -93,39 +88,6 @@ function RegistrationComponent() {
               name="location"
               control={control}
               render={({ field }) => <Input {...field} />}
-            />
-          </Form.Item>
-
-          <Form.Item label="Theme">
-            <Controller
-              name="preferences.theme"
-              control={control}
-              render={({ field }) => (
-                <Select {...field}>
-                  <Select.Option value="light">Light</Select.Option>
-                  <Select.Option value="dark">Dark</Select.Option>
-                </Select>
-              )}
-            />
-          </Form.Item>
-
-          <Form.Item label="Notifications">
-            <Controller
-              name="preferences.notifications"
-              control={control}
-              render={({ field }) => (
-                <Switch checked={field.value} onChange={field.onChange} />
-              )}
-            />
-          </Form.Item>
-
-          <Form.Item label="Active">
-            <Controller
-              name="isActive"
-              control={control}
-              render={({ field }) => (
-                <Switch checked={field.value} onChange={field.onChange} />
-              )}
             />
           </Form.Item>
 
