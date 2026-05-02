@@ -1,7 +1,7 @@
 import { Form, Input, Layout, Button } from "antd";
-import { useForm, Controller } from "react-hook-form";
 import type { UserRegistration } from "./types/user.types";
 import { useRegistration } from "./services/auth-api";
+import { Controller, useForm } from "react-hook-form";
 
 const { Content } = Layout;
 

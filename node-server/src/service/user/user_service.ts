@@ -1,6 +1,6 @@
 import logger from "../../config/logger"
 import { User } from "../../types/user"
-import { UserModel } from "./../../model/user_model"
+import { UserModel } from "../../model/user_model"
 
 export const registerUser = async (data: User) => {
     try {

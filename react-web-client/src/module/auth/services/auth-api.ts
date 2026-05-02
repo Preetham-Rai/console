@@ -3,6 +3,14 @@ import { useMutation } from "@tanstack/react-query";
 import type { UserRegistration } from "../types/user.types";
 import { useNavigate } from "react-router";
 
+type LoginResponse = {
+    userId: string;
+    status: boolean;
+    accessToken: string;
+    refreshToken: string;
+    message: string;
+};
+
 export function useRegistration() {
     const navigate = useNavigate()
     return useMutation({
@@ -26,12 +34,13 @@ export function useLogin() {
             email: string;
             password: string
         }) => {
-            const res = await http.post("/api/auth/login", data);
+            const res = await http.post<LoginResponse>("/api/auth/login", data);
             return res;
         },
-        onSuccess: (data) => {
+        onSuccess: (data: LoginResponse) => {
             console.log(data)
-            navigate('/dashboard')
+            localStorage.setItem('token', data.accessToken)
+            navigate('/app/dashboard')
         },
         onError: (error) => {
             console.error(error)

@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router'
 import { axiosInstance } from './axios'
+
+const navigate = useNavigate()
 
 axiosInstance.interceptors.request.use(
     (config) => {
@@ -18,6 +21,8 @@ axiosInstance.interceptors.response.use(
     async (error) => {
         if (error.response?.status === 401) {
             //redirect functionality to login page
+            // logout()
+            navigate('/auth/login')
         }
 
         return Promise.reject(error)
