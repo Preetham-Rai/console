@@ -1,3 +1,4 @@
+import { tryCatch } from "bullmq"
 import logger from "../../config/logger"
 import { jobQueue } from "../../jobs/queue"
 import { DiscussionModel } from "../../model/discussions/discussion_model"
@@ -46,6 +47,94 @@ export const writeDiscussion = async (payload: Discussion, user: AuthUser) => {
         return {
             status: false,
             message: "Error while creating discussion"
+        }
+    }
+}
+
+export const readAllDiscussions = async (user: AuthUser) => {
+    try {
+        const isAuthorized = user.permissions?.includes('read')
+
+        if (!isAuthorized) {
+            const err = new Error('User is not authorized to view the discussion');
+            (err as any).statusCode = 403;
+            (err as any).code = "NOT_AUTHORIZED"
+
+            throw err
+        }
+
+        const discussions = await DiscussionModel.find({})
+
+        if (!discussions) {
+            return {
+                status: false,
+                data: null,
+                message: "Falied to fetch all discussion"
+            }
+        }
+
+        return {
+            status: true,
+            data: discussions,
+            message: "Discussion fetched successfully"
+        }
+
+    } catch (error) {
+        logger.error(error)
+        return {
+            status: false,
+            data: null,
+            message: "Error while fetching Discussion"
+        }
+    }
+}
+
+export const dropDiscussion = async (id: string | string[], user: AuthUser) => {
+    try {
+        const discussions = await DiscussionModel.findByIdAndDelete(id)
+
+        if (!discussions) {
+            return {
+                status: false,
+                message: "Falied to delete discussion"
+            }
+        }
+
+        return {
+            status: true,
+            message: "Discussion deleted successfully"
+        }
+
+    } catch (error) {
+        logger.error(error)
+        return {
+            status: false,
+            message: "Error while deleting Discussion"
+        }
+    }
+}
+
+export const editDiscussion = async (id: string | string[], user: AuthUser, payload: any) => {
+    try {
+        const discussions = await DiscussionModel.findByIdAndUpdate(id, payload, { new: true })
+
+        if (!discussions) {
+            return {
+                status: false,
+                message: "Falied to update discussion"
+            }
+        }
+
+        return {
+            status: true,
+            message: "Discussion updated successfully"
+        }
+
+    } catch (error) {
+        logger.error(error)
+        return {
+            status: false,
+            message: "Error while updating Discussion"
         }
     }
 }

@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { createDiscussion } from "../controller/v1/discussion_controller";
+import { createDiscussion, deleteDiscussion, getAllDiscussions, updateDiscussion } from "../controller/v1/discussion_controller";
 
 const router = Router()
 
-router.post('/', createDiscussion)
+router.route('/')
+    .get(getAllDiscussions)
+    .post(createDiscussion)
+
+router.route('/:id')
+    .delete(deleteDiscussion)
+    .put(updateDiscussion)
 
 export default router;

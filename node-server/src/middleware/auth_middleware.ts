@@ -8,10 +8,14 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
     const authorization = req.headers.authorization;
 
     if (!authorization) {
-        res.status(401).send({ message: 'You are not authorised' })
+        return res.status(401).send({ message: 'You are not authorised' })
     }
 
     const token = authorization?.split(' ')[1] as string
+
+    if (!token) {
+        return res.status(401).send({ message: 'Token missing' })
+    }
 
     try {
         const result = verifyAccessToken(token);

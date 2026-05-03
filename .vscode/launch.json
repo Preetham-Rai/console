@@ -13,11 +13,11 @@
                 "run",
                 "dev"
             ],
-            "cwd": "${workspaceFolder}/server/services/node-server",
+            "cwd": "${workspaceFolder}/node-server",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "restart": true,
-            "envFile": "${workspaceFolder}/server/services/node-server/.env"
+            "envFile": "${workspaceFolder}/node-server/.env"
         },
         {
             "type": "node",
@@ -33,9 +33,9 @@
             "args": [
                 "${file}"
             ],
-            "cwd": "${workspaceFolder}/server/services/node-server",
+            "cwd": "${workspaceFolder}/node-server",
             "console": "integratedTerminal",
-            "envFile": "${workspaceFolder}/server/services/node-server/.env"
+            "envFile": "${workspaceFolder}/node-server/.env"
         },
         {
             "name": "Launch file",

@@ -1,4 +1,0 @@
-.env
-.env.*
-!.env.example
-config/production.yaml
